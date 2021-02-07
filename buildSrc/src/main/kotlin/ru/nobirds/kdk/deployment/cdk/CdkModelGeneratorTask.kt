@@ -46,6 +46,7 @@ open class CdkModelGeneratorTask() : DefaultTask() {
             groupDir.mkdirs()
 
             groupDir.resolve("construct.kt").writer().use { output ->
+                output.appendln("@file:Suppress(\"DEPRECATION\")")
                 output.appendln("package ru.nobirds.kdk.cdk.dsl.$group")
                 output.appendln()
                 output.appendln("import ru.nobirds.kdk.cdk.dsl.*")
@@ -69,6 +70,7 @@ open class CdkModelGeneratorTask() : DefaultTask() {
             groupDir.mkdirs()
 
             groupDir.resolve("builders.kt").writer().use { output ->
+                output.appendln("@file:Suppress(\"DEPRECATION\")")
                 output.appendln("package ru.nobirds.kdk.cdk.dsl.$group")
                 output.appendln()
                 output.appendln("import ru.nobirds.kdk.cdk.dsl.*")
@@ -86,6 +88,7 @@ open class CdkModelGeneratorTask() : DefaultTask() {
             groupDir.mkdirs()
 
             groupDir.resolve("buildersProps.kt").writer().use { output ->
+                output.appendln("@file:Suppress(\"DEPRECATION\")")
                 output.appendln("package ru.nobirds.kdk.cdk.dsl.$group")
                 output.appendln()
                 output.appendln("import ru.nobirds.kdk.cdk.dsl.*")
@@ -116,7 +119,7 @@ open class CdkModelGeneratorTask() : DefaultTask() {
                             val parameterTypeName = parameter.kotlin.qualifiedName
 
                             if(deprecated) output.appendln("@Deprecated(message = \"Deprecated in AWS CDK\")")
-                            output.append("inline fun ${type.declaringClass.canonicalName}.Builder.$name(vararg items: $parameterTypeName) ")
+                            output.append("fun ${type.declaringClass.canonicalName}.Builder.$name(vararg items: $parameterTypeName) ")
                             output.appendln("{ $name(items.toList()) }")
                         } else if(parameter is WildcardType) {
                             val upperBound = parameter.upperBounds[0]
@@ -129,7 +132,7 @@ open class CdkModelGeneratorTask() : DefaultTask() {
                                     output.appendln("{ $name(buildItems(builder).map { ${parameterTypeName}.builder().apply(it).build() }) }")
                                 } else {
                                     if(deprecated) output.appendln("@Deprecated(message = \"Deprecated in AWS CDK\")")
-                                    output.append("inline fun ${type.declaringClass.canonicalName}.Builder.$name(vararg items: ${parameterTypeName}) ")
+                                    output.append("fun ${type.declaringClass.canonicalName}.Builder.$name(vararg items: ${parameterTypeName}) ")
                                     output.appendln("{ $name(items.toList()) }")
                                 }
                             } else {

@@ -1,25 +1,11 @@
-import ru.nobirds.kdk.deployment.defaultPublishingRepository
-
 plugins {
-    kotlin("jvm") version "1.3.72"
-    `maven-publish`
+    kotlin("jvm") version "1.4.30"
+    `central-publishing`
     id("cdk-generator")
 }
 
 repositories {
     mavenCentral()
-}
-
-publishing {
-    defaultPublishingRepository(project.version)
-
-    publications {
-        publications {
-            register<MavenPublication>("mavenJava") {
-                from(components["java"])
-            }
-        }
-    }
 }
 
 tasks {

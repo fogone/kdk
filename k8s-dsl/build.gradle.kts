@@ -1,8 +1,6 @@
-import ru.nobirds.kdk.deployment.defaultPublishingRepository
-
 plugins {
-    kotlin("jvm") version "1.3.72"
-    `maven-publish`
+    kotlin("jvm") version "1.4.30"
+    `central-publishing`
     id("k8s-generator")
 }
 
@@ -11,20 +9,7 @@ repositories {
 }
 
 dependencies {
-    api("io.fabric8:kubernetes-client:4.9.1")
-    implementation(kotlin("stdlib"))
-}
-
-publishing {
-    defaultPublishingRepository(project.version)
-
-    publications {
-        publications {
-            register<MavenPublication>("mavenJava") {
-                from(components["java"])
-            }
-        }
-    }
+    api("io.fabric8:kubernetes-client:5.0.1")
 }
 
 tasks {

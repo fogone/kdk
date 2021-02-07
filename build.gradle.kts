@@ -16,12 +16,6 @@ val realVersion = scmVersion.version
 allprojects {
     group = "ru.nobirds.kdk"
     version = realVersion
-
-    repositories {
-        jcenter()
-        mavenCentral()
-        maven("https://plugins.gradle.org/m2/")
-    }
 }
 
 logger.quiet("Current version: ${scmVersion.version}")

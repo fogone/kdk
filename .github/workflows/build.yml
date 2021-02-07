@@ -1,8 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -14,8 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
+        with:
+          fetch-depth: 0
+      - name: Build and check
         run: ./gradlew build
 

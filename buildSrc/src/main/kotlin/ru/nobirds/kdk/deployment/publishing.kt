@@ -7,9 +7,11 @@ fun PublishingExtension.defaultPublishingRepository(version: Any) {
     repositories {
         maven {
             name = "sonatype"
-            val repoName = if(version.toString().endsWith("SNAPSHOT")) "snapshots" else "releases"
+            val repo = if(version.toString().endsWith("SNAPSHOT"))
+                "https://oss.sonatype.org/content/repositories/snapshots" else
+                "https://oss.sonatype.org/service/local/staging/deploy/maven2"
 
-            url = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            url = URI(repo)
 
             credentials {
                 username = System.getProperty("SONATYPE_USER")

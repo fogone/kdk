@@ -1,7 +1,5 @@
 plugins {
-    java
     `kotlin-dsl`
-    kotlin("jvm") version "1.3.72"
 }
 
 repositories {
@@ -10,7 +8,7 @@ repositories {
 
 dependencies {
     implementation("org.reflections:reflections:0.9.11")
-    implementation("io.fabric8:kubernetes-client:4.9.1")
+    implementation("io.fabric8:kubernetes-client:5.0.1")
 
     listOf(
         "apigateway",
@@ -66,4 +64,4 @@ dependencies {
     }
 }
 
-fun awsCdk(name: String) = "software.amazon.awscdk:$name:1.82.0"
+fun awsCdk(name: String) = "software.amazon.awscdk:$name:1.88.0"

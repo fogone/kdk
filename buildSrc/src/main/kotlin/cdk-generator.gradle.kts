@@ -74,7 +74,6 @@ dependencies {
     ).forEach {
         compileOnly(awsCdk(it))
     }
-    implementation(kotlin("stdlib"))
 }
 
-fun awsCdk(name: String) = "software.amazon.awscdk:$name:1.82.0"
+fun awsCdk(name: String) = "software.amazon.awscdk:$name:1.88.0"

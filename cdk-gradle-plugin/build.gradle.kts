@@ -1,3 +1,4 @@
+import com.gradle.publish.PluginConfig
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -33,7 +34,7 @@ pluginBundle {
     vcsUrl = "https://github.com/fogone/kdk"
 
     plugins {
-        register("ru.nobirds.kdk.cdk") {
+        findOrCreate("ru.nobirds.kdk.cdk") {
             displayName = "Kotlin Cdk Gradle Plugin"
             description = "This plugin allows to define cdk config and run it from gradle"
             tags = listOf("kotlin", "aws", "cdk", "k8s", "deployment")
@@ -50,4 +51,12 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
+}
+
+fun NamedDomainObjectContainer<PluginConfig>.findOrCreate(
+    name: String, configuration: PluginConfig.() -> Unit): PluginConfig {
+
+    val config = findByName(name) ?: create(name)
+
+    return config.apply(configuration)
 }

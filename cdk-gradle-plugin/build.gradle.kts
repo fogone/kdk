@@ -31,7 +31,14 @@ gradlePlugin {
 pluginBundle {
     website = "https://github.com/fogone/kdk"
     vcsUrl = "https://github.com/fogone/kdk"
-    tags = listOf("kotlin", "aws", "cdk", "k8s", "deployment")
+
+    plugins {
+        register("ru.nobirds.kdk.cdk") {
+            displayName = "Kotlin Cdk Gradle Plugin"
+            description = "This plugin allows to define cdk config and run it from gradle"
+            tags = listOf("kotlin", "aws", "cdk", "k8s", "deployment")
+        }
+    }
 }
 
 java {

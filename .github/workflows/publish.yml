@@ -8,6 +8,8 @@ on:
 env:
   SONATYPE_USER: ${{ secrets.SONATYPE_USERNAME }}
   SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+  GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
+  GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
 
 jobs:
   build:
@@ -22,5 +24,7 @@ jobs:
           ./gradlew release \
             -Prelease.customUsername=${{ github.actor }} \
             -Prelease.customPassword=${{ github.token }}
-      - name: Publish
+      - name: Publish artifacts
         run: ./gradlew publish -DSONATYPE_USER=${SONATYPE_USER} -DSONATYPE_PASSWORD=${SONATYPE_PASSWORD}
+      - name: Publish plugins
+        run: ./gradlew publishPlugins -Pgradle.publish.key=${GRADLE_PUBLISH_KEY} -Pgradle.publish.secret=${GRADLE_PUBLISH_SECRET}
